@@ -1,0 +1,21 @@
+<app-home-navbar [items]="[]"></app-home-navbar>
+<div class="min-h-screen bg-[#f6efe3] text-neutral-900">
+    <app-about-hero [title]="hero.title" [subtitle]="hero.subtitle" />
+
+    <section class="px-6 py-14 md:px-10 lg:px-16">
+        <div class="mx-auto max-w-7xl">
+            <app-about-intro [data]="aboutData" />
+        </div>
+    </section>
+
+    <section class="px-6 pb-14 md:px-10 lg:px-16">
+        <div class="mx-auto max-w-7xl">
+            <app-about-values [items]="values" />
+        </div>
+    </section>
+
+    <app-footer brand="PATRICK MUNDO"
+        description="Discover Ecuador with private tours, local experiences and personalized routes designed for unforgettable memories."
+        address="Cuenca, Ecuador" email="patrickmundo593@gmail.com" phone="+593 990014703" [socials]="socials"
+        copyright="© 2026 Patrick Mundo. All rights reserved."></app-footer>
+</div>

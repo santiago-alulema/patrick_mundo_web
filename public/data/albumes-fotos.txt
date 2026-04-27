@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Cuenca",
+    "country": "Ecuador",
+    "photosCount": 25,
+    "coverImage": "https://...",
+    "photos": [
+      {
+        "id": 1,
+        "title": "Laguna Colorada - Vista Roja",
+        "imageUrl": "https://...",
+        "description": "Hermosa vista...",
+        "location": "Bolivia",
+        "size": "4000x3000",
+        "price": 120
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Cuenca 2",
+    "country": "Ecuador",
+    "photosCount": 1,
+    "coverImage": "https://img.freepik.com/foto-gratis/cascada-naturaleza-tailandia_335224-989.jpg?semt=ais_hybrid&w=740&q=80",
+    "photos": [
+      {
+        "id": 1,
+        "title": "numero 2",
+        "imageUrl": "https://static.vecteezy.com/system/resources/thumbnails/072/454/698/small/beautiful-sunset-over-a-reflective-beach-with-rocky-formations-capturing-the-vibrant-colors-and-tranquil-atmosphere-of-a-serene-coastal-landscape-at-dusk-photo.jpg",
+        "description": "test",
+        "location": "Cuenca, Ecuador",
+        "size": "4000x3000",
+        "price": 120
+      }
+    ]
+  }
+]

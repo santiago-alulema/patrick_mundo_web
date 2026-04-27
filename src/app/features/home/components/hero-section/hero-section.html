@@ -1,0 +1,21 @@
+<section class="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
+    [style.background-image]="'url(' + backgroundImage + ')'">
+    <div class="absolute inset-0 bg-black/35"></div>
+
+    <div class="relative z-10 px-6 text-center text-white">
+        <img [src]="logo" alt="Logo" class="mx-auto mb-4 w-24 md:w-32" />
+
+        <h1 class="text-4xl font-black tracking-wide md:text-7xl">
+            {{ title }}
+        </h1>
+
+        <p class="mt-2 text-2xl font-semibold md:text-4xl">
+            {{ subtitle }}
+        </p>
+
+        <button type="button" (click)="ctaClick.emit()"
+            class="mt-8 rounded-full bg-orange-500 px-8 py-3 text-sm font-bold tracking-wide text-white shadow-lg transition hover:bg-orange-600">
+            {{ buttonText }}
+        </button>
+    </div>
+</section>

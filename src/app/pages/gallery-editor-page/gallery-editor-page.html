@@ -1,0 +1,152 @@
+<div class="editor-page">
+    <header class="hero">
+        <div>
+            <span class="badge">Admin local</span>
+            <h1>Editor de álbumes</h1>
+            <p>Gestiona fotos por URL, previsualiza cambios y descarga el JSON actualizado.</p>
+        </div>
+
+        <button class="btn primary" (click)="downloadTxt()" [disabled]="albums().length === 0">
+            Descargar TXT actualizado
+        </button>
+    </header>
+
+    <p class="message" *ngIf="message()">{{ message() }}</p>
+
+    <section class="layout" *ngIf="albums().length > 0">
+        <aside class="sidebar">
+            <h2>Álbumes</h2>
+
+            <button class="album-button" *ngFor="let album of albums()" [class.active]="album.id === selectedAlbumId()"
+                (click)="selectAlbum(album.id)">
+
+                <img [src]="album.coverImage" [alt]="album.title" />
+
+                <div>
+                    <strong>{{ album.title }}</strong>
+                    <span>{{ album.country }} · {{ album.photos?.length || 0 }} fotos</span>
+                </div>
+            </button>
+        </aside>
+
+        <main class="content">
+            <section class="card">
+                <div class="section-title">
+                    <div>
+                        <h2>Álbumes</h2>
+                        <p>Administra tus destinos y colecciones de fotos.</p>
+                    </div>
+
+                    <button class="btn primary" type="button" (click)="toggleAlbumForm()">
+                        {{ showAlbumForm() ? 'Cerrar' : '+ Agregar nuevo álbum' }}
+                    </button>
+                </div>
+
+                <div class="album-form" *ngIf="showAlbumForm()">
+                    <h3>Nuevo álbum</h3>
+
+                    <div class="form-grid">
+                        <div>
+                            <label>Título del álbum</label>
+                            <input [(ngModel)]="newAlbum.title" placeholder="Ej: Galápagos" />
+                        </div>
+
+                        <div>
+                            <label>País</label>
+                            <input [(ngModel)]="newAlbum.country" placeholder="Ej: Ecuador" />
+                        </div>
+
+                        <div class="full">
+                            <label>Imagen de portada</label>
+                            <input [(ngModel)]="newAlbum.coverImage" placeholder="https://..." />
+                        </div>
+                    </div>
+
+                    <div class="preview-box small" *ngIf="newAlbum.coverImage">
+                        <img [src]="newAlbum.coverImage" alt="Vista previa portada" />
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn primary" type="button" (click)="addAlbum()">
+                            Guardar álbum
+                        </button>
+
+                        <button class="btn ghost" type="button" (click)="cancelAlbumForm()">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section class="card">
+                <h2>Agregar nueva foto</h2>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Título</label>
+                        <input [(ngModel)]="newPhoto.title" placeholder="Ej: Atardecer en Cuenca" />
+                    </div>
+
+                    <div>
+                        <label>URL de imagen</label>
+                        <input [(ngModel)]="newPhoto.imageUrl" placeholder="https://..." />
+                    </div>
+
+                    <div>
+                        <label>Ubicación</label>
+                        <input [(ngModel)]="newPhoto.location" placeholder="Cuenca, Ecuador" />
+                    </div>
+
+                    <div>
+                        <label>Tamaño</label>
+                        <input [(ngModel)]="newPhoto.size" />
+                    </div>
+
+                    <div>
+                        <label>Precio</label>
+                        <input type="number" [(ngModel)]="newPhoto.price" />
+                    </div>
+                </div>
+
+                <label>Descripción</label>
+                <textarea [(ngModel)]="newPhoto.description" placeholder="Describe brevemente la foto"></textarea>
+
+                <div class="preview-box" *ngIf="newPhoto.imageUrl">
+                    <img [src]="newPhoto.imageUrl" alt="Vista previa" />
+                </div>
+
+                <div class="actions">
+                    <button class="btn primary" (click)="addPhoto()">Agregar foto</button>
+                    <button class="btn ghost" (click)="clearForm()">Limpiar</button>
+                </div>
+            </section>
+
+            <section class="card" *ngIf="selectedAlbum() as album">
+                <div class="section-title">
+                    <div>
+                        <h2>{{ album.title }}</h2>
+                        <p>{{ album.country }} · {{ album.photos?.length || 0 }} fotos</p>
+                    </div>
+                </div>
+
+                <div class="photos-grid">
+                    <article class="photo-card" *ngFor="let photo of album.photos">
+                        <img [src]="photo.imageUrl" [alt]="photo.title" />
+
+                        <div class="photo-body">
+                            <h3>{{ photo.title }}</h3>
+                            <p class="muted">{{ photo.location }}</p>
+                            <p>{{ photo.description }}</p>
+
+                            <div class="photo-footer">
+                                <span>${{ photo.price }}</span>
+                                <button class="btn danger" (click)="deletePhoto(photo.id)">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </section>
+</div>

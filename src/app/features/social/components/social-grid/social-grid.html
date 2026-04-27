@@ -1,0 +1,5 @@
+<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+    @for (item of items; track item.title) {
+    <app-social-card [item]="item" />
+    }
+</div>

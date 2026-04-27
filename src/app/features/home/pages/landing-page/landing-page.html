@@ -1,0 +1,35 @@
+<app-home-navbar [items]="navItems" (navigateTo)="scrollToSection($event)"></app-home-navbar>
+
+<div class="bg-stone-100 text-neutral-900">
+    <section id="home">
+        <app-hero-section [title]="heroData.title" [subtitle]="heroData.subtitle" [buttonText]="heroData.buttonText"
+            [backgroundImage]="heroData.backgroundImage" [logo]="heroData.logo"
+            (ctaClick)="scrollToSection('contact')" />
+    </section>
+    <section id="about" class="px-6 py-14 md:px-12 lg:px-20">
+        <app-feature-highlight [data]="featureData" />
+    </section>
+
+    <section id="destinations" class="bg-[#5f4a28] px-6 py-14 md:px-12 lg:px-20">
+        <app-destinations-section [title]="'My favorite destinations'" [items]="favoriteDestinations" />
+    </section>
+
+    <section id="trips" class="px-6 py-16 md:px-12 lg:px-20">
+        <app-popular-trips-section [title]="'Other popular trips'" [items]="popularTrips" />
+    </section>
+
+    <section id="reviews" [ngStyle]="{
+    'background-image': 'url(images/fondo_seccion_comentarios.jpg)'
+  }" class="bg-cover bg-center bg-no-repeat px-6 py-16 md:px-12 lg:px-20">
+        <app-reviews-section [title]="'Reviews from friends who joined me'" [items]="reviews" />
+    </section>
+
+    <section id="contact" class="bg-[#5f4a28] px-6 py-14 md:px-12 lg:px-20">
+        <app-contact-banner />
+    </section>
+    <app-footer brand="PATRICK MUNDO"
+        description="Discover Ecuador with private tours, local experiences and personalized routes designed for unforgettable memories."
+        address="Cuenca, Ecuador" email="patrickmundo593@gmail.com" phone="+593 990014703" [socials]="socials"
+        copyright="© 2026 Patrick Mundo. All rights reserved." />
+
+</div>

@@ -1,0 +1,24 @@
+<app-home-navbar [items]="navItems" (navigateTo)="scrollToSection($event)"></app-home-navbar>
+
+<div class="min-h-screen bg-[#f7efe2]">
+    <app-gallery-hero [title]="heroData.title" [subtitle]="heroData.subtitle" [logo]="heroData.logo"
+        [backgroundImage]="heroData.backgroundImage" />
+
+    <section class="px-6 py-12 md:px-12 lg:px-20">
+        <div class="mx-auto max-w-7xl">
+            <app-gallery-toolbar title="Pictures Gallery" subtitle="Available for sale"
+                (searchChange)="onSearch($event)" />
+
+            <div class="mt-10">
+                <app-gallery-grid [albums]="filteredAlbums" />
+            </div>
+
+            <div class="mt-12 flex justify-center">
+                <button type="button"
+                    class="rounded-full bg-orange-500 px-10 py-4 text-sm font-bold tracking-wide text-black shadow-md transition hover:scale-[1.02] hover:bg-orange-400">
+                    VER TODOS LOS ALBUMES
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

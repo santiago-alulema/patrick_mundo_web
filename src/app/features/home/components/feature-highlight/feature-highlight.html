@@ -1,0 +1,27 @@
+<div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
+    <div class="rounded-[32px] bg-white p-8 shadow-sm">
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-2xl">
+            📍
+        </div>
+
+        <h2 class="text-3xl font-black text-neutral-900 md:text-5xl">
+            {{ data.title }}
+        </h2>
+
+        <p class="mt-5 text-lg leading-8 text-neutral-600">
+            {{ data.description }}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+            @for (tag of data.tags; track tag) {
+            <span class="rounded-full bg-orange-500 px-6 py-3 text-sm font-bold text-white shadow-sm">
+                {{ tag }}
+            </span>
+            }
+        </div>
+    </div>
+
+    <div class="overflow-hidden rounded-[32px] shadow-lg">
+        <img [src]="data.image" [alt]="data.title" class="h-full w-full object-cover" />
+    </div>
+</div>

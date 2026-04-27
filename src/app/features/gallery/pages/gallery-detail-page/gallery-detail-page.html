@@ -1,0 +1,39 @@
+<app-home-navbar [items]="[]"></app-home-navbar>
+
+<div class="min-h-screen bg-[#f7efe2]">
+    <app-gallery-hero [title]="heroData.title" [subtitle]="heroData.subtitle" [logo]="heroData.logo"
+        [backgroundImage]="heroData.backgroundImage"></app-gallery-hero>
+
+    <section class="px-6 py-12 md:px-12 lg:px-20" *ngIf="selectedAlbum() as album">
+        <div class="mx-auto max-w-7xl">
+            <div class="mb-10 text-center">
+                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#9a6a2f]">
+                    {{ album.country }}
+                </p>
+
+                <h1 class="mt-3 text-4xl font-black text-neutral-900 md:text-6xl">
+                    {{ album.title }}
+                </h1>
+
+                <p class="mt-4 text-base text-neutral-600 md:text-lg">
+                    {{ album.photosCount }} photos available in this album
+                </p>
+
+                <a [routerLink]="['/gallery']"
+                    class="mt-6 inline-flex rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-neutral-700 shadow-sm transition hover:border-orange-300 hover:text-orange-500">
+                    ← Volver a álbumes
+                </a>
+            </div>
+
+            <app-photo-grid [photos]="photos()" (photoSelected)="openPhoto($event)">
+            </app-photo-grid>
+        </div>
+    </section>
+
+    <app-footer brand="PATRICK MUNDO"
+        description="Discover Ecuador with private tours, local experiences and personalized routes designed for unforgettable memories."
+        address="Cuenca, Ecuador" email="patrickmundo593@gmail.com" phone="+593 990014703" [socials]="[]"
+        copyright="© 2026 Patrick Mundo. All rights reserved."></app-footer>
+    <app-photo-info-modal [photo]="selectedPhoto()" (close)="closePhotoModal()">
+    </app-photo-info-modal>
+</div>
