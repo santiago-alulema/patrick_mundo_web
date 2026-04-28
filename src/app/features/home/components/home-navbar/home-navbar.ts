@@ -12,7 +12,7 @@ export class HomeNavbar {
   @Input() items: NavItem[] = [];
   @Output() navigateTo = new EventEmitter<string>();
 
-  selectedLanguage = signal<'es' | 'en' | 'be'>('es');
+  selectedLanguage = signal<'es' | 'en' | 'be' | 'fr'>('es');
   mobileMenuOpen = signal(false);
   sidebarOpen = signal(false);
 
@@ -32,7 +32,7 @@ export class HomeNavbar {
     }
   }
 
-  changeLanguage(lang: 'es' | 'en' | 'be') {
+  changeLanguage(lang: 'es' | 'en' | 'be' | 'fr') {
     this.selectedLanguage.set(lang);
     this.mobileMenuOpen.set(false);
     this.sidebarOpen.set(false);

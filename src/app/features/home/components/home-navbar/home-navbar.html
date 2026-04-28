@@ -73,6 +73,11 @@
                 [class.ring-2]="selectedLanguage() === 'be'" [class.ring-orange-400]="selectedLanguage() === 'be'">
                 <img src="https://flagcdn.com/w40/be.png" class="h-5 w-5 rounded-full" />
             </button>
+            <button type="button" (click)="changeLanguage('fr')"
+                class="rounded-full border border-neutral-300 bg-white p-1 shadow-sm transition hover:scale-105 hover:border-orange-400"
+                [class.ring-2]="selectedLanguage() === 'fr'" [class.ring-orange-400]="selectedLanguage() === 'fr'">
+                <img src="https://flagcdn.com/w40/fr.png" class="h-5 w-5 rounded-full" />
+            </button>
         </div>
 
         <!-- BOTÓN MOBILE -->
@@ -137,7 +142,10 @@
                     <img src="https://flagcdn.com/w40/gb.png" class="h-8 w-8 rounded-full" />
                 </button>
                 <button (click)="changeLanguage('be')">
-                    <img src="https://flagcdn.com/w40/ie.png" class="h-8 w-8 rounded-full" />
+                    <img src="https://flagcdn.com/w40/be.png" class="h-8 w-8 rounded-full" />
+                </button>
+                <button (click)="changeLanguage('fr')">
+                    <img src="https://flagcdn.com/w40/fr.png" class="h-8 w-8 rounded-full" />
                 </button>
             </div>
 
