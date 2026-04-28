@@ -11,6 +11,7 @@ import { PhotoInfoModal } from "../../components/photo-info-modal/photo-info-mod
 import { GalleryAlbum } from '../../models/gallry.interface';
 import { GalleryPhoto } from '../../models/GalleryAlbum';
 import { GalleryService } from '../../../../services/GalleryService';
+import { NavItem } from '../../../home/components/models/component-interface';
 
 @Component({
   selector: 'app-gallery-detail-page',
@@ -29,6 +30,7 @@ import { GalleryService } from '../../../../services/GalleryService';
 export class GalleryDetailPage implements OnInit {
   selectedAlbum = signal<GalleryAlbum | undefined>(undefined);
   selectedPhoto = signal<GalleryPhoto | null>(null);
+ navItems: NavItem[] = [{ label: 'Home', route: '/home' }];
 
   photos = computed(() => this.selectedAlbum()?.photos ?? []);
 

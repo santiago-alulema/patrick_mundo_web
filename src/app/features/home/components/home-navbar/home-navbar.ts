@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NavItem } from '../models/component-interface';
 
 @Component({
@@ -16,26 +16,20 @@ export class HomeNavbar {
   mobileMenuOpen = signal(false);
   sidebarOpen = signal(false);
 
-  sidebarItems: NavItem[] = [
-    { label: 'Home', route: '/home' },
-    { label: 'Galería', route: '/gallery' },
-    { label: 'Redes sociales', route: '/social' },
-    { label: 'Sobre mí', route: '/about' }
-  ];
+  constructor(private router: Router) {}
 
-  onNavigate(sectionId?: string): void {
-    if (!sectionId) return;
-    this.navigateTo.emit(sectionId);
+  onNavigate(item: NavItem): void {
     this.mobileMenuOpen.set(false);
     this.sidebarOpen.set(false);
-  }
 
-  openSidebar(): void {
-    this.sidebarOpen.set(true);
-  }
+    if (item.route) {
+      this.router.navigate([item.route]);
+      return;
+    }
 
-  closeSidebar(): void {
-    this.sidebarOpen.set(false);
+    if (item.sectionId) {
+      this.navigateTo.emit(item.sectionId);
+    }
   }
 
   changeLanguage(lang: 'es' | 'en' | 'ga') {

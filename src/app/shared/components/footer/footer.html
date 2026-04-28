@@ -1,54 +1,74 @@
-<footer class="border-t border-white/10 bg-[#3f311b] text-white">
-    <div class="mx-auto max-w-7xl px-6 py-12 md:pt-10 lg:px-16">
-        <div class="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-            <div
-                class="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+<footer class="bg-gradient-to-b from-[#5a4525] to-[#2f2515] text-white">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-16">
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+
+            <!-- BRAND -->
+            <div class="max-w-md">
                 <div class="flex items-center gap-3">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500 text-xl shadow-lg">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500 text-xl shadow-md">
                         🌍
                     </div>
 
                     <div>
-                        <h2 class="text-2xl font-black tracking-wide">
+                        <h2 class="text-2xl font-bold tracking-wide">
                             {{ brand }}
                         </h2>
-                        <p class="text-sm text-white/70">
+                        <p class="text-sm text-white/60">
                             Travel with style
                         </p>
                     </div>
                 </div>
 
-                <p class="mt-5 max-w-xl text-sm leading-7 text-white/80 md:text-base">
+                <p class="mt-4 text-sm leading-7 text-white/70">
                     {{ description }}
                 </p>
+            </div>
 
-                <div class="mt-8 grid gap-4 sm:grid-cols-2">
-                    <div class="rounded-2xl bg-white/5 p-4">
-                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
-                            Address
-                        </p>
-                        <p class="mt-2 text-base font-medium text-white/90">
-                            {{ address }}
-                        </p>
-                    </div>
+            <!-- INFO -->
+            <div class="flex flex-col gap-6 text-sm">
+                <div>
+                    <p class="text-xs uppercase tracking-widest text-white/40">Address</p>
+                    <p class="mt-1 text-white/80">{{ address }}</p>
+                </div>
 
-                    <div class="rounded-2xl bg-white/5 p-4">
-                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
-                            Contact
-                        </p>
-                        <p class="mt-2 text-sm text-white/90">{{ phone }}</p>
-                        <p class="text-sm text-white/90">{{ email }}</p>
-                    </div>
+                <div>
+                    <p class="text-xs uppercase tracking-widest text-white/40">Contact</p>
+                    <p class="mt-1 text-white/80">{{ phone }}</p>
+                    <p class="text-white/80">{{ email }}</p>
                 </div>
             </div>
 
-            <app-social-links [title]="'Social media'" [items]="socials" />
+            <!-- REDES -->
+            <!-- <div class="flex items-center gap-3">
+                <a href="#" target="_blank"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
+                        class="h-5 w-5 invert" />
+                </a>
+
+                <a href="#" target="_blank"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                        class="h-5 w-5 invert" />
+                </a>
+
+                <a href="#" target="_blank"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+                        class="h-5 w-5 invert" />
+                </a>
+            </div> -->
+
         </div>
 
+        <!-- FOOTER BOTTOM -->
         <div
-            class="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
+            class="mt-10 border-t border-white/5 pt-6 text-xs text-white/50 flex flex-col gap-2 md:flex-row md:justify-between">
             <p>{{ copyright }}</p>
-            <p>Designed with a modern travel style.</p>
+            <p>Designed for modern travel experiences.</p>
         </div>
+
     </div>
 </footer>

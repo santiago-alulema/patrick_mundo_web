@@ -1,8 +1,8 @@
-<app-home-navbar [items]="[]"></app-home-navbar>
+<app-home-navbar [items]="navItems"></app-home-navbar>
 
 <div class="min-h-screen bg-[#f7efe2]">
-    <app-gallery-hero [title]="heroData.title" [subtitle]="heroData.subtitle" [logo]="heroData.logo"
-        [backgroundImage]="heroData.backgroundImage"></app-gallery-hero>
+    <!-- <app-gallery-hero [title]="heroData.title" [subtitle]="heroData.subtitle" [logo]="heroData.logo"
+        [backgroundImage]="heroData.backgroundImage"></app-gallery-hero> -->
 
     <section class="px-6 py-12 md:px-12 lg:px-20" *ngIf="selectedAlbum() as album">
         <div class="mx-auto max-w-7xl">

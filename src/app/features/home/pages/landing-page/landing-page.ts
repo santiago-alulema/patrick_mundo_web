@@ -44,19 +44,19 @@ export class LandingPage {
   ];
 
   navItems: NavItem[] = [
-    { label: 'Home', sectionId: 'home' },
-    { label: 'About', sectionId: 'about' },
-    { label: 'Destinations', sectionId: 'destinations' },
-    { label: 'Trips', sectionId: 'trips' },
-    { label: 'Reviews', sectionId: 'reviews' },
-    { label: 'Contact', sectionId: 'contact' }
-  ];
+  { label: 'Home', sectionId: 'home' },
+  { label: 'Travel info', sectionId: 'travel-info' },
+  { label: 'Reviews', sectionId: 'reviews' },
+  { label: 'Gallery', route: '/gallery' },
+  { label: 'About me', route: '/about' },
+  { label: 'Contact', sectionId: 'contact' },
+];
 
   heroData = {
     title: 'PATRICK MUNDO',
     subtitle: 'Let’s explore Ecuador !',
     buttonText: 'CONTACT ME',
-    backgroundImage: 'https://scontent.fuio5-1.fna.fbcdn.net/v/t39.30808-6/476826884_1467689050853933_7197776986047616364_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeGFLH2NGXWF9gCD0iUzTkVrYzxqKWMcPe9jPGopYxw972JXYZNO1bRlE8G1GaWFiubC0yg7GP1SeoZa2XJ9ZMMo&_nc_ohc=FyfFu6ztwq4Q7kNvwFtbDyJ&_nc_oc=Ado7baHH9phRxQOn3td4bN_yCyl_5hrCFVOaYxRRX_QoW3guhEPqQWjuyuLaz-uAWzg&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=kl8Yut04C-qK7ZCOrKKYTA&_nc_ss=7a3a8&oh=00_Af2eaz9sOEY0wbZ1mFuTCYm_MirUdkPLL0OJaZ_v9Qkxbg&oe=69E4377B',
+    backgroundImage: 'images/fondo-banner.jpg',
     logo: 'images/logo-patrick.png'
   };
 
@@ -64,7 +64,7 @@ export class LandingPage {
     title: 'Safe travel & Comfortable',
     description:
       'My vehicle is a 2023 SUV, fully insured and maintained by the dealership. It has 6 airbags, AppleCarPlay, panoramic sunroof and offers plenty room for up to 4 people.',
-    image: 'https://scontent.fuio5-1.fna.fbcdn.net/v/t39.30808-6/480186573_1469492577340247_5661120561062649629_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeH521dZeEOfOSt3og4Ie2mtsQtXKPiZBDWxC1co-JkENUgMC-N6d5YsXgv8mA70kYh9-Z6MEqI-CPb8JCjfADbG&_nc_ohc=ACk8_DomLxMQ7kNvwFojHyG&_nc_oc=AdqoZiYbfDtv3WhqPz_k_Pv59pVusW0TzwRT5zSE6NQVYrthFgG3txb-IU6c9REYsG8&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=w-lnpBHqqsWda2VaqB8OHA&_nc_ss=7a3a8&oh=00_Af1aSUrFHT1qHyeCkMmRQMEo96ExeNj8dXbJ7gkkpfkpvA&oe=69E442D1',
+    image: 'images/carro-viajes.png',
     tags: ['FULLY INSURED', '6 AIRBAGS']
   };
 
@@ -92,19 +92,19 @@ export class LandingPage {
   popularTrips: PopularTripMock[] = [
     {
       title: 'Haciendas Tour',
-      image: 'https://scontent.fuio5-1.fna.fbcdn.net/v/t39.30808-6/524497173_1593340408288796_7228470966242075798_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b895b5&_nc_ohc=P3JtKwNQrQ0Q7kNvwFqMAOt&_nc_oc=Adp4L1qRaGBwW0jkGMlrbUyQqypJvhUMckydXNZdnvjQ7xG7l0R3D09lecDaHjy9rro&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=zMPAy3Q0371odFaYoit-1g&_nc_ss=7a389&oh=00_Af2teVSOYZAHYxQN9XtRdckKCzerccfVd9cQNcfUoQNXKg&oe=69D69C00',
+      image: 'https://rebeccaadventuretravel.com/wp-content/uploads/2022/08/Family-Hacienda-1.jpg',
       description:
         'Ecuador has many 300+ year old haciendas. Many of them have been transformed into hotels, offering a great location with history.'
     },
     {
       title: 'Train ride in Alausi',
-      image: 'https://scontent.fuio5-1.fna.fbcdn.net/v/t39.30808-6/521705029_1591507581805412_5427191387561108862_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=b895b5&_nc_ohc=KXTpPRAyPdYQ7kNvwGJpvVy&_nc_oc=AdqabTObOiERMYL_8u86zPYNE-i9yAyIgWdzIOJAjVsAUgV2elPrhlanyvetNqE3kHU&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=s3BvkLbkkg7hUcI417lQcQ&_nc_ss=7a389&oh=00_Af11RPxEtXAkhBgLzXN8ZXCPMOy8hYgqlADaq4UVlHy0SA&oe=69D69483',
+      image: 'https://www.imagineecuador.com/wp-content/uploads/2021/10/Recurso-43-6.png',
       description:
         'This can be a day trip or 2 days, 1 night to explore one of the most spectacular train rides in the world.'
     },
     {
       title: 'Ingapirca-Bibllan-Gualaceo',
-      image: 'https://scontent.fuio5-1.fna.fbcdn.net/v/t39.30808-6/512024566_1570827587206745_6295415800051368419_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=110&ccb=1-7&_nc_sid=b895b5&_nc_ohc=-4uLaDZ3MLEQ7kNvwEVOWgC&_nc_oc=AdpHsJbFTbo68kt9_zMJecmL6tZpqZZDowImncmzSI_RcI_zNsV-0Akfrye53jsUVYQ&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=xCaJIDkQX5RzifgYE5bhOQ&_nc_ss=7a389&oh=00_Af2WetybmjLKjO4elS0NlKr-lfDD1tW-VQq6E8kcm3yYqQ&oe=69D69776',
+      image: 'https://www.vanservice.com.ec/tours-diarios/tour6/gualaceo3.jpg',
       description:
         'A very complete day trip, visiting Ingapirca, Orchid farm and a fabulous church in the mountain hill of Biblian'
     },
@@ -119,14 +119,14 @@ export class LandingPage {
   reviews: Review[] = [
     {
       name: 'E. Briggs',
-      avatar: 'https://img.freepik.com/foto-gratis/joven-hombre-barbudo-camisa-rayas_273609-5677.jpg?semt=ais_incoming&w=740&q=80',
+      avatar: 'images/e-bring.jpeg',
       comment:
         'Each trip we did with Patrick has been customized for us, featuring the types of activities we enjoy most. His knowledge of restaurants and accommodations in areas visited has always ensured we eat well and stay in clean, comfortable places.',
       rating: 5
     },
     {
       name: 'E. Fraterman',
-      avatar: 'https://cdn.pixabay.com/photo/2016/11/29/13/14/attractive-1869761_1280.jpg',
+      avatar: 'images/eric-fraterman.jpeg',
       comment:
         'We did a short trip to Limon Indanza with Patrick, my son and my wife. He has an intimate knowledge of this area. His choice of restaurants and our hotel was excellent. He delivered good value and I can recommend him without hesitation.',
       rating: 5

@@ -5,6 +5,7 @@ import { AboutValues } from "../../components/about-values/about-values";
 import { AboutHero } from "../../components/about-hero/about-hero";
 import { AboutIntro } from "../../components/about-intro/about-intro";
 import { HomeNavbar } from "../../../home/components/home-navbar/home-navbar";
+import { NavItem } from '../../../home/components/models/component-interface';
 
 @Component({
   selector: 'app-about-page',
@@ -17,7 +18,7 @@ export class AboutPage {
     title: 'About me',
     subtitle: 'A personal and authentic way to discover Ecuador'
   };
-
+  navItems: NavItem[] = [{ label: 'Home', route: '/home' }];
   aboutData = {
     name: 'Patrick Mundo',
     role: 'Private guide & travel host',
