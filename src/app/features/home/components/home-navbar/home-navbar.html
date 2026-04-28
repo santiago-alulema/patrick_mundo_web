@@ -16,52 +16,62 @@
 
             <!-- Redes sociales -->
             <div class="flex items-center gap-2 border-r border-neutral-300 pr-3">
-                <a href="https://www.tiktok.com/@patrickmundo3?_r=1&_t=ZS-95tvanZJtY4"  target="_blank" class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
-                        class="h-5 w-5" />
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/patrick_mundo/" target="_blank"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-pink-100 hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+                        class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </a>
 
-                <a href="https://www.youtube.com/@patrickmundo6851/videos" target="_blank" class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@patrickmundo6851/videos" target="_blank"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-red-100 hover:shadow-md">
                     <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
-                        class="h-5 w-5" />
+                        class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </a>
 
-                <a href="https://www.facebook.com/patrick.mundo.904" target="_blank" class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
-                        class="h-5 w-5" />
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@patrickmundo3?_r=1&_t=ZS-95tvanZJtY4" target="_blank"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-black/10 hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
+                        class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </a>
-               <a 
-                    href="https://wa.me/593990014703?text=Hola%20Patrick,%20me%20ayudarías%20con%20más%20información%20sobre%20tus%20servicios%20de%20turismo%3F"
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/patrick.mundo.904" target="_blank"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-blue-100 hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+                        class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/593990014703?text=Hola%20Patrick,%20me%20podr%C3%ADas%20contactar%20para%20m%C3%A1s%20informaci%C3%B3n%3F"
                     target="_blank"
-                    class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100"
-                    >
-                    <img 
-                        src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
-                        class="h-5 w-5"
-                    />
-                    </a>
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-green-100 hover:shadow-md">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
+                        class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                </a>
+
             </div>
 
             <!-- Idiomas -->
             <button type="button" (click)="changeLanguage('es')"
                 class="rounded-full border border-neutral-300 bg-white p-1 shadow-sm transition hover:scale-105 hover:border-orange-400"
-                [class.ring-2]="selectedLanguage() === 'es'"
-                [class.ring-orange-400]="selectedLanguage() === 'es'">
+                [class.ring-2]="selectedLanguage() === 'es'" [class.ring-orange-400]="selectedLanguage() === 'es'">
                 <img src="https://flagcdn.com/w40/es.png" class="h-5 w-5 rounded-full" />
             </button>
 
             <button type="button" (click)="changeLanguage('en')"
                 class="rounded-full border border-neutral-300 bg-white p-1 shadow-sm transition hover:scale-105 hover:border-orange-400"
-                [class.ring-2]="selectedLanguage() === 'en'"
-                [class.ring-orange-400]="selectedLanguage() === 'en'">
+                [class.ring-2]="selectedLanguage() === 'en'" [class.ring-orange-400]="selectedLanguage() === 'en'">
                 <img src="https://flagcdn.com/w40/gb.png" class="h-5 w-5 rounded-full" />
             </button>
 
-            <button type="button" (click)="changeLanguage('ga')"
+            <button type="button" (click)="changeLanguage('be')"
                 class="rounded-full border border-neutral-300 bg-white p-1 shadow-sm transition hover:scale-105 hover:border-orange-400"
-                [class.ring-2]="selectedLanguage() === 'ga'"
-                [class.ring-orange-400]="selectedLanguage() === 'ga'">
-                <img src="https://flagcdn.com/w40/ie.png" class="h-5 w-5 rounded-full" />
+                [class.ring-2]="selectedLanguage() === 'be'" [class.ring-orange-400]="selectedLanguage() === 'be'">
+                <img src="https://flagcdn.com/w40/be.png" class="h-5 w-5 rounded-full" />
             </button>
         </div>
 
@@ -84,32 +94,38 @@
             </button>
             }
 
-            <!-- Redes sociales MOBILE -->
+
+
+
             <div class="mt-4 flex items-center gap-3 border-t border-neutral-200 pt-4">
-                <a href="https://www.tiktok.com/@patrickmundo3?_r=1&_t=ZS-95tvanZJtY4" class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
+
+                <a href="https://www.instagram.com/patrick_mundo/" target="_blank"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
                         class="h-5 w-5" />
                 </a>
 
-                <a href="https://www.youtube.com/@patrickmundo6851/videos" class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
+                <a href="https://www.tiktok.com/@patrickmundo3?_r=1&_t=ZS-95tvanZJtY4"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" class="h-5 w-5" />
+                </a>
+
+                <a href="https://www.youtube.com/@patrickmundo6851/videos"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
                     <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
                         class="h-5 w-5" />
                 </a>
 
-                <a href="https://www.facebook.com/patrick.mundo.904" class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
+                <a href="https://www.facebook.com/patrick.mundo.904"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
                     <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
                         class="h-5 w-5" />
                 </a>
-                <a 
-                    href="https://wa.me/593990014703?text=Hola%20Patrick,%20me%20ayudarías%20con%20más%20información%20sobre%20tus%20servicios%20de%20turismo%3F"
-                    target="_blank"
-                    class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100"
-                    >
-                    <img 
-                        src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
-                        class="h-5 w-5"
-                    />
-                    </a>
+                <a href="https://wa.me/593990014703?text=Hola%20Patrick,%20me%20podrias%20contactar%20para%20mas%20informacion%20%3F"
+                    target="_blank" class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
+                        class="h-5 w-5" />
+                </a>
             </div>
 
             <!-- Idiomas MOBILE -->
@@ -120,7 +136,7 @@
                 <button (click)="changeLanguage('en')">
                     <img src="https://flagcdn.com/w40/gb.png" class="h-8 w-8 rounded-full" />
                 </button>
-                <button (click)="changeLanguage('ga')">
+                <button (click)="changeLanguage('be')">
                     <img src="https://flagcdn.com/w40/ie.png" class="h-8 w-8 rounded-full" />
                 </button>
             </div>

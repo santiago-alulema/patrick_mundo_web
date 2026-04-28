@@ -30,7 +30,7 @@ import { NavItem } from '../../../home/components/models/component-interface';
 export class GalleryDetailPage implements OnInit {
   selectedAlbum = signal<GalleryAlbum | undefined>(undefined);
   selectedPhoto = signal<GalleryPhoto | null>(null);
- navItems: NavItem[] = [{ label: 'Home', route: '/home' }];
+  navItems: NavItem[] = [{ label: 'Home', route: '/home' }];
 
   photos = computed(() => this.selectedAlbum()?.photos ?? []);
 
@@ -67,7 +67,7 @@ export class GalleryDetailPage implements OnInit {
 
   buyPhoto(photo: GalleryPhoto): void {
     console.log("first")
-    const phone = '593986078545';
+    const phone = '593990014703';
 
     const message = `
 Hola Patrick, estoy interesado en comprar esta fotografía:
