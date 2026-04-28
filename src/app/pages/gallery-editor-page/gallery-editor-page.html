@@ -88,7 +88,7 @@
 
                     <div>
                         <label>URL de imagen</label>
-                        <input [(ngModel)]="newPhoto.imageUrl" placeholder="https://..." />
+                        <input type="text" [(ngModel)]="newPhoto.imageUrl" (blur)="onImageUrlChange()" />
                     </div>
 
                     <div>

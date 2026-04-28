@@ -1,0 +1,29 @@
+<section class="container">
+    <h1>Optimizar imágenes</h1>
+
+    <p>
+        Sube varias imágenes, baja la calidad y agrega tu marca de agua.
+    </p>
+
+    <div class="card">
+        <label class="upload-box">
+            <input type="file" multiple accept="image/*" (change)="onFilesSelected($event)" />
+
+            <span>Seleccionar imágenes</span>
+        </label>
+
+        <div class="quality-box">
+            <label>Calidad: {{ quality * 100 | number:'1.0-0' }}%</label>
+
+            <input type="range" min="0.3" max="1" step="0.1" [(ngModel)]="quality" />
+        </div>
+
+        <p *ngIf="selectedFiles.length > 0">
+            Imágenes seleccionadas: {{ selectedFiles.length }}
+        </p>
+
+        <button type="button" [disabled]="selectedFiles.length === 0 || isProcessing" (click)="downloadZip()">
+            {{ isProcessing ? 'Procesando...' : 'Descargar ZIP' }}
+        </button>
+    </div>
+</section>

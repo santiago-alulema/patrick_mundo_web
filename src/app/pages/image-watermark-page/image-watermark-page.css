@@ -1,0 +1,55 @@
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.upload-box {
+  display: block;
+  border: 2px dashed #ff6b1a;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.upload-box input {
+  display: none;
+}
+
+.upload-box span {
+  color: #ff6b1a;
+  font-weight: 700;
+}
+
+.quality-box {
+  margin-bottom: 20px;
+}
+
+.quality-box input {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  background: #ff6b1a;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

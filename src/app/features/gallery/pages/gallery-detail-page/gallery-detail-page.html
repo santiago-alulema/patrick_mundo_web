@@ -34,6 +34,6 @@
         description="Discover Ecuador with private tours, local experiences and personalized routes designed for unforgettable memories."
         address="Cuenca, Ecuador" email="patrickmundo593@gmail.com" phone="+593 990014703" [socials]="[]"
         copyright="© 2026 Patrick Mundo. All rights reserved."></app-footer>
-    <app-photo-info-modal [photo]="selectedPhoto()" (close)="closePhotoModal()">
+    <app-photo-info-modal [photo]="selectedPhoto()" (close)="closePhotoModal()" (buy)="buyPhoto($event)">
     </app-photo-info-modal>
 </div>

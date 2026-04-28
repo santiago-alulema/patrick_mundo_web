@@ -74,18 +74,24 @@ export class GalleryEditorPage implements OnInit {
     album.photos.push({
       id: nextId,
       title: this.newPhoto.title,
-      imageUrl: this.newPhoto.imageUrl,
+      imageUrl: this.normalizeImageUrl(this.newPhoto.imageUrl),
       description: this.newPhoto.description,
       location: this.newPhoto.location,
       size: this.newPhoto.size,
       price: Number(this.newPhoto.price)
     });
 
+
+
     album.photosCount = album.photos.length;
 
     this.albums.set(albums);
     this.clearForm();
     this.message.set('Foto agregada. Descarga el archivo actualizado.');
+  }
+
+  onImageUrlChange(): void {
+    this.newPhoto.imageUrl = this.normalizeImageUrl(this.newPhoto.imageUrl);
   }
 
   deletePhoto(photoId: number): void {
@@ -100,6 +106,25 @@ export class GalleryEditorPage implements OnInit {
 
     this.albums.set(albums);
     this.message.set('Foto eliminada. Descarga el archivo actualizado.');
+  }
+
+  private normalizeImageUrl(url: string): string {
+    if (!url) return '';
+
+    if (url.includes('public_html/images_albumes/')) {
+      const fileName = url.split('public_html/images_albumes/')[1];
+      return `https://patrickmundo.com/images_albumes/${fileName}`;
+    }
+
+    if (url.includes('patrickmundo.com/images_albumes/')) {
+      return url;
+    }
+
+    if (!url.startsWith('http')) {
+      return `https://patrickmundo.com/images_albumes/${url}`;
+    }
+
+    return url;
   }
 
   downloadTxt(): void {

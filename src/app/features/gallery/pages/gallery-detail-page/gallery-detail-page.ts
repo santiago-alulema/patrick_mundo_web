@@ -62,4 +62,23 @@ export class GalleryDetailPage implements OnInit {
   closePhotoModal(): void {
     this.selectedPhoto.set(null);
   }
+
+  buyPhoto(photo: GalleryPhoto): void {
+    console.log("first")
+    const phone = '593986078545';
+
+    const message = `
+Hola Patrick, estoy interesado en comprar esta fotografía:
+
+- Imagen: ${photo.imageUrl}
+- Lugar: ${photo.location ?? 'Cuenca, Ecuador'}
+- Precio: $${photo.price ?? ''}
+
+Por favor me ayudas con más información.
+  `.trim();
+
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, '_blank');
+  }
 }

@@ -11,8 +11,13 @@ import { CurrencyPipe } from '@angular/common';
 export class PhotoInfoModal {
   @Input() photo: GalleryPhoto | null = null;
   @Output() close = new EventEmitter<void>();
-
+  @Output() buy = new EventEmitter<GalleryPhoto>();
   onClose(): void {
     this.close.emit();
+  }
+
+  onBuy(): void {
+    if (!this.photo) return;
+    this.buy.emit(this.photo);
   }
 }

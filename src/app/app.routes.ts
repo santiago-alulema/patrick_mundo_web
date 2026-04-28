@@ -4,6 +4,7 @@ import { SocialPage } from './features/social/pages/social-page/social-page';
 import { AboutPage } from './features/about/pages/about-page/about-page';
 import { GalleryDetailPage } from './features/gallery/pages/gallery-detail-page/gallery-detail-page';
 import { GalleryEditorPage } from './pages/gallery-editor-page/gallery-editor-page';
+import { ImageWatermarkPage } from './pages/image-watermark-page/image-watermark-page';
 
 export const routes: Routes = [
     {
@@ -33,5 +34,9 @@ export const routes: Routes = [
     {
         path: 'admin-gallery-editor',
         component: GalleryEditorPage
+    },
+    {
+        path: 'edit-images-editor',
+        component: ImageWatermarkPage
     }
 ];
