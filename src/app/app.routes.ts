@@ -5,6 +5,9 @@ import { AboutPage } from './features/about/pages/about-page/about-page';
 import { GalleryDetailPage } from './features/gallery/pages/gallery-detail-page/gallery-detail-page';
 import { GalleryEditorPage } from './pages/gallery-editor-page/gallery-editor-page';
 import { ImageWatermarkPage } from './pages/image-watermark-page/image-watermark-page';
+import { BlogEditorPage } from './features/blog-admin/blog-editor-page/blog-editor-page';
+import { BlogPage } from './features/blog/pages/blog-page/blog-page';
+import { BlogDetailPage } from './features/blog/pages/blog-detail-page/blog-detail-page';
 
 export const routes: Routes = [
     {
@@ -38,5 +41,17 @@ export const routes: Routes = [
     {
         path: 'edit-images-editor',
         component: ImageWatermarkPage
+    },
+    {
+        path: 'edit-blog',
+        component: BlogEditorPage
+    },
+    {
+        path: 'blogs',
+        component: BlogPage
+    },
+    {
+        path: 'blog/:slug',
+        component: BlogDetailPage
     }
 ];

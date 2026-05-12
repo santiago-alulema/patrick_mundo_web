@@ -3,6 +3,7 @@ import { GalleryAlbum } from '../../features/gallery/models/gallry.interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { GalleryAdminService } from '../services/gallery-admin.service';
 
 @Component({
   selector: 'app-gallery-editor-page',
@@ -11,11 +12,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './gallery-editor-page.css',
 })
 export class GalleryEditorPage implements OnInit {
-  private readonly fileUrl = '/data/albumes-fotos.txt';
-
   albums = signal<GalleryAlbum[]>([]);
   selectedAlbumId = signal<number | null>(null);
   message = signal('');
+  showAlbumForm = signal(false);
+  uploading = signal(false);
+
+  selectedCoverFile: File | null = null;
+  uploadingCover = signal(false);
+
+  selectedFile: File | null = null;
 
   newPhoto = {
     title: '',
@@ -26,25 +32,31 @@ export class GalleryEditorPage implements OnInit {
     price: 120
   };
 
+  newAlbum = {
+    title: '',
+    country: '',
+    coverImage: ''
+  };
+
   selectedAlbum = computed(() =>
     this.albums().find(a => a.id === this.selectedAlbumId())
   );
 
-  constructor(private http: HttpClient) { }
+  constructor(private galleryService: GalleryAdminService) { }
 
   ngOnInit(): void {
-    this.loadAlbumsFromFile();
+    this.loadAlbums();
   }
 
-  loadAlbumsFromFile(): void {
-    this.http.get<GalleryAlbum[]>(this.fileUrl).subscribe({
+  loadAlbums(): void {
+    this.galleryService.getAlbums().subscribe({
       next: data => {
         this.albums.set(data);
         this.selectedAlbumId.set(data[0]?.id ?? null);
-        this.message.set('Álbumes cargados correctamente.');
+        this.message.set('Álbumes cargados desde el backend.');
       },
       error: () => {
-        this.message.set('No se pudo cargar /data/albumes-fotos.json');
+        this.message.set('No se pudieron cargar los álbumes.');
       }
     });
   }
@@ -53,93 +65,104 @@ export class GalleryEditorPage implements OnInit {
     this.selectedAlbumId.set(id);
   }
 
-  addPhoto(): void {
-    const albumId = this.selectedAlbumId();
-    const albums = structuredClone(this.albums());
-    const album = albums.find(a => a.id === albumId);
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
 
-    if (!album) return;
+    if (!input.files?.length) return;
 
-    if (!this.newPhoto.title.trim() || !this.newPhoto.imageUrl.trim()) {
-      this.message.set('El título y la URL son obligatorios.');
+    this.selectedFile = input.files[0];
+    this.message.set(`Imagen seleccionada: ${this.selectedFile.name}`);
+  }
+
+  uploadSelectedImage(): void {
+    if (!this.selectedFile) {
+      this.message.set('Selecciona una imagen primero.');
       return;
     }
 
-    album.photos ??= [];
+    this.uploading.set(true);
 
-    const nextId = album.photos.length
-      ? Math.max(...album.photos.map(p => p.id)) + 1
-      : 1;
+    this.galleryService.uploadImage(this.selectedFile).subscribe({
+      next: response => {
+        this.newPhoto.imageUrl = response.imageUrl;
+        this.uploading.set(false);
+        this.message.set('Imagen subida correctamente.');
+      },
+      error: () => {
+        this.uploading.set(false);
+        this.message.set('No se pudo subir la imagen.');
+      }
+    });
+  }
 
-    album.photos.push({
-      id: nextId,
+  addPhoto(): void {
+    const albumId = this.selectedAlbumId();
+
+    if (!albumId) return;
+
+    if (!this.newPhoto.title.trim() || !this.newPhoto.imageUrl.trim()) {
+      this.message.set('El título y la imagen son obligatorios.');
+      return;
+    }
+
+    const photo = {
       title: this.newPhoto.title,
-      imageUrl: this.normalizeImageUrl(this.newPhoto.imageUrl),
+      imageUrl: this.newPhoto.imageUrl,
       description: this.newPhoto.description,
       location: this.newPhoto.location,
       size: this.newPhoto.size,
-      price: Number(this.newPhoto.price)
+      price: Number(this.newPhoto.price),
+      albumId
+    };
+
+    this.galleryService.createPhoto(photo).subscribe({
+      next: () => {
+        this.clearForm();
+        this.loadAlbums();
+        this.message.set('Foto guardada correctamente.');
+      },
+      error: () => {
+        this.message.set('No se pudo guardar la foto.');
+      }
     });
-
-
-
-    album.photosCount = album.photos.length;
-
-    this.albums.set(albums);
-    this.clearForm();
-    this.message.set('Foto agregada. Descarga el archivo actualizado.');
-  }
-
-  onImageUrlChange(): void {
-    this.newPhoto.imageUrl = this.normalizeImageUrl(this.newPhoto.imageUrl);
   }
 
   deletePhoto(photoId: number): void {
-    const albumId = this.selectedAlbumId();
-    const albums = structuredClone(this.albums());
-    const album = albums.find(a => a.id === albumId);
-
-    if (!album?.photos) return;
-
-    album.photos = album.photos.filter(p => p.id !== photoId);
-    album.photosCount = album.photos.length;
-
-    this.albums.set(albums);
-    this.message.set('Foto eliminada. Descarga el archivo actualizado.');
+    this.galleryService.deletePhoto(photoId).subscribe({
+      next: () => {
+        this.loadAlbums();
+        this.message.set('Foto eliminada correctamente.');
+      },
+      error: () => {
+        this.message.set('No se pudo eliminar la foto.');
+      }
+    });
   }
 
-  private normalizeImageUrl(url: string): string {
-    if (!url) return '';
-
-    if (url.includes('public_html/images_albumes/')) {
-      const fileName = url.split('public_html/images_albumes/')[1];
-      return `https://patrickmundo.com/images_albumes/${fileName}`;
+  addAlbum(): void {
+    if (!this.newAlbum.title.trim() || !this.newAlbum.country.trim()) {
+      this.message.set('El título y país del álbum son obligatorios.');
+      return;
     }
 
-    if (url.includes('patrickmundo.com/images_albumes/')) {
-      return url;
-    }
+    const album = {
+      title: this.newAlbum.title,
+      country: this.newAlbum.country,
+      coverImage: this.newAlbum.coverImage || 'https://via.placeholder.com/800x500?text=Nuevo+Album',
+      photos: []
+    };
 
-    if (!url.startsWith('http')) {
-      return `https://patrickmundo.com/images_albumes/${url}`;
-    }
-
-    return url;
-  }
-
-  downloadTxt(): void {
-    const json = JSON.stringify(this.albums(), null, 2);
-    const blob = new Blob([json], { type: 'text/plain;charset=utf-8' });
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-
-    link.href = url;
-    link.download = 'albumes-fotos.txt';
-    link.click();
-
-    URL.revokeObjectURL(url);
-    this.message.set('Archivo descargado correctamente.');
+    this.galleryService.createAlbum(album).subscribe({
+      next: savedAlbum => {
+        this.loadAlbums();
+        this.selectedAlbumId.set(savedAlbum.id);
+        this.cancelAlbumForm();
+        this.message.set('Álbum guardado correctamente.');
+      },
+      error: () => {
+        this.message.set('No se pudo guardar el álbum.');
+      }
+    });
   }
 
   clearForm(): void {
@@ -151,48 +174,9 @@ export class GalleryEditorPage implements OnInit {
       size: '4000x3000',
       price: 120
     };
+
+    this.selectedFile = null;
   }
-
-  newAlbum = {
-    title: '',
-    country: '',
-    coverImage: ''
-  };
-
-  addAlbum(): void {
-    if (!this.newAlbum.title.trim() || !this.newAlbum.country.trim()) {
-      this.message.set('El título y país del álbum son obligatorios.');
-      return;
-    }
-
-    const albums = structuredClone(this.albums());
-
-    const nextId = albums.length
-      ? Math.max(...albums.map(a => a.id)) + 1
-      : 1;
-
-    albums.push({
-      id: nextId,
-      title: this.newAlbum.title,
-      country: this.newAlbum.country,
-      photosCount: 0,
-      coverImage: this.newAlbum.coverImage || 'https://via.placeholder.com/800x500?text=Nuevo+Album',
-      photos: []
-    });
-
-    this.albums.set(albums);
-    this.selectedAlbumId.set(nextId);
-
-    this.newAlbum = {
-      title: '',
-      country: '',
-      coverImage: ''
-    };
-    this.showAlbumForm.set(false);
-    this.message.set('Álbum agregado correctamente.');
-  }
-
-  showAlbumForm = signal(false);
 
   toggleAlbumForm(): void {
     this.showAlbumForm.update(value => !value);
@@ -200,11 +184,41 @@ export class GalleryEditorPage implements OnInit {
 
   cancelAlbumForm(): void {
     this.showAlbumForm.set(false);
-
+    this.selectedCoverFile = null;
     this.newAlbum = {
       title: '',
       country: '',
       coverImage: ''
     };
+  }
+
+  onCoverFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files?.length) return;
+
+    this.selectedCoverFile = input.files[0];
+    this.message.set(`Portada seleccionada: ${this.selectedCoverFile.name}`);
+  }
+
+  uploadSelectedCover(): void {
+    if (!this.selectedCoverFile) {
+      this.message.set('Selecciona una portada primero.');
+      return;
+    }
+
+    this.uploadingCover.set(true);
+
+    this.galleryService.uploadImage(this.selectedCoverFile).subscribe({
+      next: response => {
+        this.newAlbum.coverImage = response.imageUrl;
+        this.uploadingCover.set(false);
+        this.message.set('Portada subida correctamente.');
+      },
+      error: () => {
+        this.uploadingCover.set(false);
+        this.message.set('No se pudo subir la portada.');
+      }
+    });
   }
 }

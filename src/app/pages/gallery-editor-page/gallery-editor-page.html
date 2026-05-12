@@ -1,54 +1,58 @@
 <div class="editor-page">
     <header class="hero">
         <div>
-            <span class="badge">Admin local</span>
+            <span class="badge">Admin Backend</span>
             <h1>Editor de álbumes</h1>
-            <p>Gestiona fotos por URL, previsualiza cambios y descarga el JSON actualizado.</p>
+            <p>Primero crea un álbum, luego sube fotos dentro de ese álbum.</p>
         </div>
-
-        <button class="btn primary" (click)="downloadTxt()" [disabled]="albums().length === 0">
-            Descargar TXT actualizado
-        </button>
     </header>
 
-    <p class="message" *ngIf="message()">{{ message() }}</p>
+    <p class="message" *ngIf="message()">
+        {{ message() }}
+    </p>
 
-    <section class="layout" *ngIf="albums().length > 0">
+    <section class="layout">
+
+        <!-- SIDEBAR ALBUMES -->
         <aside class="sidebar">
             <h2>Álbumes</h2>
 
+            <p class="muted" *ngIf="albums().length === 0">
+                Todavía no hay álbumes creados.
+            </p>
+
             <button class="album-button" *ngFor="let album of albums()" [class.active]="album.id === selectedAlbumId()"
                 (click)="selectAlbum(album.id)">
-
                 <img [src]="album.coverImage" [alt]="album.title" />
 
                 <div>
                     <strong>{{ album.title }}</strong>
-                    <span>{{ album.country }} · {{ album.photos?.length || 0 }} fotos</span>
+                    <span>{{ album.country }} · {{ album?.photos?.length || 0 }} fotos</span>
                 </div>
             </button>
         </aside>
 
+        <!-- CONTENIDO -->
         <main class="content">
+
+            <!-- CREAR ALBUM -->
             <section class="card">
                 <div class="section-title">
                     <div>
-                        <h2>Álbumes</h2>
-                        <p>Administra tus destinos y colecciones de fotos.</p>
+                        <h2>1. Crear álbum</h2>
+                        <p>Crea una colección y sube su imagen de portada.</p>
                     </div>
 
                     <button class="btn primary" type="button" (click)="toggleAlbumForm()">
-                        {{ showAlbumForm() ? 'Cerrar' : '+ Agregar nuevo álbum' }}
+                        {{ showAlbumForm() ? 'Cerrar' : '+ Nuevo álbum' }}
                     </button>
                 </div>
 
                 <div class="album-form" *ngIf="showAlbumForm()">
-                    <h3>Nuevo álbum</h3>
-
                     <div class="form-grid">
                         <div>
                             <label>Título del álbum</label>
-                            <input [(ngModel)]="newAlbum.title" placeholder="Ej: Galápagos" />
+                            <input [(ngModel)]="newAlbum.title" placeholder="Ej: Cuenca" />
                         </div>
 
                         <div>
@@ -57,8 +61,19 @@
                         </div>
 
                         <div class="full">
-                            <label>Imagen de portada</label>
-                            <input [(ngModel)]="newAlbum.coverImage" placeholder="https://..." />
+                            <label>Portada del álbum</label>
+
+                            <input type="file" accept="image/*" (change)="onCoverFileSelected($event)" />
+
+                            <button class="btn ghost mt-2" type="button" (click)="uploadSelectedCover()"
+                                [disabled]="uploadingCover()">
+                                {{ uploadingCover() ? 'Subiendo portada...' : 'Subir portada' }}
+                            </button>
+                        </div>
+
+                        <div class="full">
+                            <label>URL portada generada</label>
+                            <input type="text" [(ngModel)]="newAlbum.coverImage" readonly />
                         </div>
                     </div>
 
@@ -67,7 +82,8 @@
                     </div>
 
                     <div class="actions">
-                        <button class="btn primary" type="button" (click)="addAlbum()">
+                        <button class="btn primary" type="button" (click)="addAlbum()"
+                            [disabled]="!newAlbum.coverImage">
                             Guardar álbum
                         </button>
 
@@ -77,8 +93,25 @@
                     </div>
                 </div>
             </section>
-            <section class="card">
-                <h2>Agregar nueva foto</h2>
+
+            <!-- MENSAJE SI NO HAY ALBUM SELECCIONADO -->
+            <section class="card" *ngIf="!selectedAlbumId()">
+                <h2>2. Agregar fotos</h2>
+                <p class="muted">
+                    Primero crea o selecciona un álbum para poder subir fotos.
+                </p>
+            </section>
+
+            <!-- AGREGAR FOTO -->
+            <section class="card" *ngIf="selectedAlbumId()">
+                <div class="section-title">
+                    <div>
+                        <h2>2. Agregar foto</h2>
+                        <p *ngIf="selectedAlbum() as album">
+                            Se agregará al álbum: <strong>{{ album.title }}</strong>
+                        </p>
+                    </div>
+                </div>
 
                 <div class="form-grid">
                     <div>
@@ -87,8 +120,14 @@
                     </div>
 
                     <div>
-                        <label>URL de imagen</label>
-                        <input type="text" [(ngModel)]="newPhoto.imageUrl" (blur)="onImageUrlChange()" />
+                        <label>Imagen de la foto</label>
+
+                        <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+                        <button class="btn ghost mt-2" type="button" (click)="uploadSelectedImage()"
+                            [disabled]="uploading()">
+                            {{ uploading() ? 'Subiendo imagen...' : 'Subir imagen' }}
+                        </button>
                     </div>
 
                     <div>
@@ -105,6 +144,11 @@
                         <label>Precio</label>
                         <input type="number" [(ngModel)]="newPhoto.price" />
                     </div>
+
+                    <div class="full">
+                        <label>URL imagen generada</label>
+                        <input type="text" [(ngModel)]="newPhoto.imageUrl" readonly />
+                    </div>
                 </div>
 
                 <label>Descripción</label>
@@ -115,31 +159,48 @@
                 </div>
 
                 <div class="actions">
-                    <button class="btn primary" (click)="addPhoto()">Agregar foto</button>
-                    <button class="btn ghost" (click)="clearForm()">Limpiar</button>
+                    <button class="btn primary" type="button" (click)="addPhoto()" [disabled]="!newPhoto.imageUrl">
+                        Guardar foto
+                    </button>
+
+                    <button class="btn ghost" type="button" (click)="clearForm()">
+                        Limpiar
+                    </button>
                 </div>
             </section>
 
+            <!-- LISTADO DE FOTOS -->
             <section class="card" *ngIf="selectedAlbum() as album">
                 <div class="section-title">
                     <div>
-                        <h2>{{ album.title }}</h2>
-                        <p>{{ album.country }} · {{ album.photos?.length || 0 }} fotos</p>
+                        <h2>Fotos del álbum</h2>
+                        <p>{{ album.title }} · {{ album?.photos?.length || 0 }} fotos</p>
                     </div>
                 </div>
 
-                <div class="photos-grid">
+                <p class="muted" *ngIf="!album.photos || album.photos.length === 0">
+                    Este álbum todavía no tiene fotos.
+                </p>
+
+                <div class="photos-grid" *ngIf="album.photos && album.photos.length > 0">
                     <article class="photo-card" *ngFor="let photo of album.photos">
                         <img [src]="photo.imageUrl" [alt]="photo.title" />
 
                         <div class="photo-body">
                             <h3>{{ photo.title }}</h3>
-                            <p class="muted">{{ photo.location }}</p>
-                            <p>{{ photo.description }}</p>
+
+                            <p class="muted">
+                                {{ photo.location }}
+                            </p>
+
+                            <p>
+                                {{ photo.description }}
+                            </p>
 
                             <div class="photo-footer">
                                 <span>${{ photo.price }}</span>
-                                <button class="btn danger" (click)="deletePhoto(photo.id)">
+
+                                <button class="btn danger" type="button" (click)="deletePhoto(photo.id)">
                                     Eliminar
                                 </button>
                             </div>
@@ -147,6 +208,7 @@
                     </article>
                 </div>
             </section>
+
         </main>
     </section>
 </div>

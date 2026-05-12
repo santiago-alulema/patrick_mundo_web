@@ -1,0 +1,168 @@
+<div class="blog-admin">
+    <header class="hero">
+        <div>
+            <span class="badge">Blog Admin</span>
+            <h1>Mantenimiento de posts</h1>
+            <p>Crea artículos, sube portadas, organiza por categorías y publica contenido.</p>
+        </div>
+    </header>
+
+    <p class="message" *ngIf="message()">
+        {{ message() }}
+    </p>
+
+    <section class="layout">
+
+        <main class="editor-card">
+            <div class="section-title">
+                <div>
+                    <h2>{{ editingPostId() ? 'Editar post' : 'Crear nuevo post' }}</h2>
+                    <p>Completa la información principal del artículo.</p>
+                </div>
+
+                <button class="btn ghost" type="button" (click)="clearPostForm()" *ngIf="editingPostId()">
+                    Cancelar edición
+                </button>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label>Título</label>
+                    <input [(ngModel)]="postForm.title" (input)="onTitleChange()"
+                        placeholder="Ej: Los mejores lugares de Cuenca" />
+                </div>
+
+                <div>
+                    <label>Slug</label>
+                    <input [(ngModel)]="postForm.slug" placeholder="los-mejores-lugares-de-cuenca" />
+                </div>
+
+                <div>
+                    <label>Categoría</label>
+                    <select [(ngModel)]="postForm.categoryId">
+                        <option [ngValue]="0">Selecciona una categoría</option>
+                        <option *ngFor="let category of categories()" [ngValue]="category.id">
+                            {{ category.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Estado</label>
+                    <select [(ngModel)]="postForm.isPublished">
+                        <option [ngValue]="false">Borrador</option>
+                        <option [ngValue]="true">Publicado</option>
+                    </select>
+                </div>
+
+                <div class="full">
+                    <label>Resumen</label>
+                    <textarea rows="3" [(ngModel)]="postForm.summary"
+                        placeholder="Resumen corto para mostrar en tarjetas o listados"></textarea>
+                </div>
+
+                <div class="full">
+                    <label>Portada del post</label>
+
+                    <div class="upload-box">
+                        <input type="file" accept="image/*" (change)="onCoverSelected($event)" />
+
+                        <button class="btn secondary" type="button" (click)="uploadCover()"
+                            [disabled]="uploadingCover()">
+                            {{ uploadingCover() ? 'Subiendo...' : 'Subir portada' }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="full">
+                    <label>URL de portada</label>
+                    <input [(ngModel)]="postForm.coverImage" readonly
+                        placeholder="La URL se generará automáticamente" />
+                </div>
+
+                <div class="full preview" *ngIf="postForm.coverImage">
+                    <img [src]="postForm.coverImage" alt="Portada del post" />
+                </div>
+
+                <div class="full">
+                    <label>Contenido</label>
+                    <textarea rows="12" [(ngModel)]="postForm.content"
+                        placeholder="Escribe aquí el contenido completo del artículo..."></textarea>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn primary" type="button" (click)="savePost()">
+                    {{ editingPostId() ? 'Actualizar post' : 'Guardar post' }}
+                </button>
+
+                <button class="btn ghost" type="button" (click)="clearPostForm()">
+                    Limpiar
+                </button>
+            </div>
+        </main>
+
+        <aside class="side-card">
+            <h2>Categorías</h2>
+            <p>Crea categorías rápidas para clasificar tus posts.</p>
+
+            <label>Nombre</label>
+            <input [(ngModel)]="categoryForm.name" (input)="onCategoryNameChange()" placeholder="Ej: Viajes" />
+
+            <label>Slug</label>
+            <input [(ngModel)]="categoryForm.slug" placeholder="viajes" />
+
+            <button class="btn primary full-btn" type="button" (click)="createCategory()">
+                Crear categoría
+            </button>
+
+            <div class="category-list">
+                <span *ngFor="let category of categories()">
+                    {{ category.name }}
+                </span>
+            </div>
+        </aside>
+
+    </section>
+
+    <section class="posts-section">
+        <div class="section-title">
+            <div>
+                <h2>Posts creados</h2>
+                <p>Administra tus artículos publicados y borradores.</p>
+            </div>
+        </div>
+
+        <p class="empty" *ngIf="posts().length === 0 && !loading()">
+            Todavía no tienes posts creados.
+        </p>
+
+        <div class="posts-grid">
+            <article class="post-card" *ngFor="let post of posts()">
+                <img [src]="post.coverImage" [alt]="post.title" />
+
+                <div class="post-body">
+                    <div class="post-status">
+                        <span>{{ post.category?.name || 'Sin categoría' }}</span>
+                        <strong [class.published]="post.isPublished">
+                            {{ post.isPublished ? 'Publicado' : 'Borrador' }}
+                        </strong>
+                    </div>
+
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.summary }}</p>
+
+                    <div class="post-actions">
+                        <button class="btn secondary" type="button" (click)="editPost(post)">
+                            Editar
+                        </button>
+
+                        <button class="btn danger" type="button" (click)="deletePost(post.id)">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -44,13 +44,14 @@ export class LandingPage {
   ];
 
   navItems: NavItem[] = [
-  { label: 'Home', sectionId: 'home' },
-  { label: 'Travel info', sectionId: 'travel-info' },
-  { label: 'Reviews', sectionId: 'reviews' },
-  { label: 'Gallery', route: '/gallery' },
-  { label: 'About me', route: '/about' },
-  { label: 'Contact', sectionId: 'contact' },
-];
+    { label: 'Home', sectionId: 'home' },
+    { label: 'Travel info', sectionId: 'travel-info' },
+    { label: 'Reviews', sectionId: 'reviews' },
+    { label: 'Gallery', route: '/gallery' },
+    { label: 'About me', route: '/about' },
+    { label: 'Contact', sectionId: 'contact' },
+    { label: 'Blog', route: 'blogs' },
+  ];
 
   heroData = {
     title: 'PATRICK MUNDO',
@@ -63,7 +64,7 @@ export class LandingPage {
   featureData: FeatureHighlightMock = {
     title: 'Safe travel & Comfortable',
     description:
-      'My vehicle is a 2023 SUV, fully insured and maintained by the dealership. It has 6 airbags, AppleCarPlay, panoramic sunroof and offers plenty room for up to 4 people.',
+      'My vehicle is a 2023 SUV, FULLY INSURED and maintained by the dealership. It features 6 AIRBAGS, Apple CarPlay, a panoramic sunroof, and offers plenty of room for up to 4 people.',
     image: 'images/carro-viajes.png',
     tags: ['FULLY INSURED', '6 AIRBAGS']
   };
@@ -77,7 +78,7 @@ export class LandingPage {
     },
     {
       title: 'Quito - Cuenca',
-      image: 'https://www.cuenca.gob.ec/sites/default/files/noticias/WhatsApp%20Image%202023-12-08%20at%208.24.31%20AM_0.jpeg',
+      image: 'images/mitad-mundo-quito.jpeg',
       description:
         'This is a trip that everyone who lives in Ecuador should do once. This journey includes volcanoes, 300+ year old haciendas and much more.'
     },
@@ -92,7 +93,7 @@ export class LandingPage {
   popularTrips: PopularTripMock[] = [
     {
       title: 'Haciendas Tour',
-      image: 'https://rebeccaadventuretravel.com/wp-content/uploads/2022/08/Family-Hacienda-1.jpg',
+      image: '/images/hacienda-fotos.jpeg',
       description:
         'Ecuador has many 300+ year old haciendas. Many of them have been transformed into hotels, offering a great location with history.'
     },
@@ -104,13 +105,13 @@ export class LandingPage {
     },
     {
       title: 'Ingapirca-Bibllan-Gualaceo',
-      image: 'https://www.vanservice.com.ec/tours-diarios/tour6/gualaceo3.jpg',
+      image: '/images/ingapirca-portada.jpeg',
       description:
         'A very complete day trip, visiting Ingapirca, Orchid farm and a fabulous church in the mountain hill of Biblian'
     },
     {
       title: 'Birding in the Cloud Forest',
-      image: 'images/image-inicio_2.png',
+      image: 'images/aves-fotos.jpeg',
       description:
         'Seeing some of the most exclusive birds of Ecuador in the cloud forest, at only 2 hours away from Cuenca'
     }

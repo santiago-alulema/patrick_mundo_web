@@ -27,8 +27,8 @@
                 <p>{{ data.description3 }}</p>
             </div>
 
-            <button type="button"
-                class="mt-10 rounded-full bg-black px-8 py-3 text-sm font-bold tracking-wide text-white transition hover:scale-[1.02] hover:bg-neutral-900">
+            <button type="button" (click)="openWhatsApp()"
+                class="mt-10 rounded-full bg-emerald-600 px-8 py-3 text-sm font-bold tracking-wide text-white shadow-md transition-all duration-300 hover:scale-[1.03] hover:bg-emerald-700 hover:shadow-xl active:scale-95">
                 {{ data.cta }}
             </button>
         </div>

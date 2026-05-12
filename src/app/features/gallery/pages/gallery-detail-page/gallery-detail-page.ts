@@ -3,7 +3,6 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 
 import { PhotoGrid } from "../../components/photo-grid/photo-grid";
-import { GalleryHero } from "../../components/gallery-hero/gallery-hero";
 import { HomeNavbar } from "../../../home/components/home-navbar/home-navbar";
 import { Footer } from "../../../../shared/components/footer/footer";
 import { PhotoInfoModal } from "../../components/photo-info-modal/photo-info-modal";
@@ -17,7 +16,6 @@ import { NavItem } from '../../../home/components/models/component-interface';
   selector: 'app-gallery-detail-page',
   imports: [
     PhotoGrid,
-    GalleryHero,
     HomeNavbar,
     Footer,
     NgIf,
@@ -30,7 +28,11 @@ import { NavItem } from '../../../home/components/models/component-interface';
 export class GalleryDetailPage implements OnInit {
   selectedAlbum = signal<GalleryAlbum | undefined>(undefined);
   selectedPhoto = signal<GalleryPhoto | null>(null);
-  navItems: NavItem[] = [{ label: 'Home', route: '/home' }];
+  navItems: NavItem[] = [
+    { label: 'Home', route: 'home' },
+    { label: 'Gallery', route: '/gallery' },
+    { label: 'About me', route: '/about' },
+  ];
 
   photos = computed(() => this.selectedAlbum()?.photos ?? []);
 

@@ -1,24 +1,57 @@
-<app-home-navbar [items]="navItems" (navigateTo)="scrollToSection($event)"></app-home-navbar>
+<app-home-navbar [items]="navItems" (navigateTo)="scrollToSection($event)">
+</app-home-navbar>
 
-<div class="min-h-screen bg-[#f7efe2]">
-    <app-gallery-hero [title]="heroData.title" [subtitle]="heroData.subtitle" [logo]="heroData.logo"
-        [backgroundImage]="heroData.backgroundImage" />
+<div class="mt-10 text-center" *ngIf="!loading() && !errorMessage() && filteredAlbums.length > 0">
+    <div class="min-h-screen bg-[#f7efe2]">
+        <app-gallery-hero [title]="heroData.title" [subtitle]="heroData.subtitle" [logo]="heroData.logo"
+            [backgroundImage]="heroData.backgroundImage">
+        </app-gallery-hero>
 
-    <section class="px-6 py-12 md:px-12 lg:px-20">
-        <div class="mx-auto max-w-7xl">
-            <app-gallery-toolbar title="Pictures Gallery" subtitle="Available for sale"
-                (searchChange)="onSearch($event)" />
+        <section class="px-6 py-12 md:px-12 lg:px-20">
+            <div class="mx-auto max-w-7xl">
+                <app-gallery-toolbar title="Pictures Gallery" subtitle="Available for sale"
+                    (searchChange)="onSearch($event)">
+                </app-gallery-toolbar>
 
-            <div class="mt-10">
-                <app-gallery-grid [albums]="filteredAlbums" />
+                <div class="mt-10" *ngIf="loading()">
+                    <p class="text-center text-lg font-semibold text-neutral-700">
+                        Cargando álbumes...
+                    </p>
+                </div>
+
+                <div class="mt-10" *ngIf="errorMessage()">
+                    <p class="text-center text-lg font-semibold text-red-600">
+                        {{ errorMessage() }} ---
+                    </p>
+                </div>
+
+                <div class="mt-10" *ngIf="!loading() && !errorMessage()">
+                    <app-gallery-grid [albums]="filteredAlbums"></app-gallery-grid>
+                </div>
+
+                <div class="mt-10 text-center" *ngIf="!loading() && !errorMessage() && filteredAlbums.length === 0">
+                    <p class="text-lg font-semibold text-neutral-700">
+                        <app-under-construction />
+                    </p>
+                </div>
+
+                <div class="mt-12 flex justify-center">
+                    <button type="button"
+                        class="rounded-full bg-orange-500 px-10 py-4 text-sm font-bold tracking-wide text-black shadow-md transition hover:scale-[1.02] hover:bg-orange-400">
+                        VER TODOS LOS ALBUMES
+                    </button>
+                </div>
             </div>
-
-            <div class="mt-12 flex justify-center">
-                <button type="button"
-                    class="rounded-full bg-orange-500 px-10 py-4 text-sm font-bold tracking-wide text-black shadow-md transition hover:scale-[1.02] hover:bg-orange-400">
-                    VER TODOS LOS ALBUMES
-                </button>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </div>
+
+<p class="text-lg font-semibold text-neutral-700" *ngIf="!loading() && !errorMessage() && filteredAlbums.length === 0">
+    <app-under-construction />
+</p>
+
+
+<app-footer brand="PATRICK MUNDO"
+    description="Discover Ecuador, local experiences and personalized routes designed for unforgettable memories."
+    address="Cuenca, Ecuador" email="patrickmundo593@gmail.com" phone="+593 990014703"
+    copyright="© 2026 Patrick Mundo. All rights reserved." />

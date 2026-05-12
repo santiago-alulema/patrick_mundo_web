@@ -1,0 +1,64 @@
+<app-home-navbar [items]="navItems"></app-home-navbar>
+
+<div class="blog-page">
+    <header class="blog-hero">
+        <span class="eyebrow">Patrick Mundo</span>
+
+        <h1>Travel Blog</h1>
+
+        <p>
+            Stories, travel tips and local experiences to help you explore Ecuador with confidence.
+        </p>
+    </header>
+
+    <main class="blog-container">
+        <div class="blog-toolbar">
+            <div>
+                <h2>Latest stories</h2>
+                <p>Discover routes, recommendations and hidden places.</p>
+            </div>
+
+            <input type="text" (ngModel)="search" placeholder="Search article..." />
+        </div>
+
+        <div class="state-box" *ngIf="loading()">
+            Loading blog posts...
+        </div>
+
+        <div class="state-box error" *ngIf="errorMessage()">
+            {{ errorMessage() }}
+        </div>
+
+        <div class="state-box" *ngIf="!loading() && !errorMessage() && filteredPosts.length === 0">
+            No blog posts available yet.
+        </div>
+
+        <div class="blog-grid" *ngIf="!loading() && filteredPosts.length > 0">
+            <article class="blog-card" *ngFor="let post of filteredPosts">
+                <div class="image-wrapper">
+                    <img [src]="post.coverImage" [alt]="post.title" />
+                </div>
+
+                <div class="blog-body">
+                    <div class="meta">
+                        <span>{{ post.category?.name || 'Travel' }}</span>
+                        <small>{{ formatDate(post.createdAt) }}</small>
+                    </div>
+
+                    <h3>{{ post.title }}</h3>
+
+                    <p>{{ post.summary }}</p>
+
+                    <a class="read-more" [routerLink]="['/blog', post.slug]">
+                        Read article
+                        <span>→</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+</div>
+<app-footer brand="PATRICK MUNDO"
+    description="Discover Ecuador, local experiences and personalized routes designed for unforgettable memories."
+    address="Cuenca, Ecuador" email="patrickmundo593@gmail.com" phone="+593 990014703"
+    copyright="© 2026 Patrick Mundo. All rights reserved." />

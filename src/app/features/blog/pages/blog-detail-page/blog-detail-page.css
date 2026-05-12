@@ -1,0 +1,153 @@
+.detail-page {
+  min-height: 100vh;
+  background: #f3eadb;
+  padding: 60px 20px 100px;
+}
+
+.newspaper {
+  max-width: 1050px;
+  margin: 0 auto;
+  background: #fffaf0;
+  padding: 46px;
+  border-radius: 16px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5d6bd;
+}
+
+.newspaper-header {
+  border-bottom: 3px solid #1f2937;
+  padding-bottom: 26px;
+  margin-bottom: 34px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #111;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.paper-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid #1f2937;
+  border-bottom: 1px solid #1f2937;
+  padding: 8px 0;
+  margin-bottom: 22px;
+  color: #44403c;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.paper-meta span {
+  color: #b45309;
+  font-weight: 900;
+}
+
+.newspaper-header h1 {
+  margin: 0;
+  color: #1c1917;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -2px;
+}
+
+.summary {
+  margin: 20px 0 0;
+  max-width: 850px;
+  color: #57534e;
+  font-size: 22px;
+  line-height: 1.55;
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.newspaper-body {
+  display: block;
+  column-count: 2;
+  column-gap: 34px;
+}
+
+.article-image {
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 20px;
+}
+
+.article-image img {
+  width: 100%;
+  max-height: 270px;
+  object-fit: cover;
+  border: 1px solid #d6c7ad;
+}
+
+.article-image figcaption {
+  margin-top: 8px;
+  color: #57534e;
+  font-size: 15px;
+  line-height: 1.4;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.article-text {
+  display: contents;
+}
+.article-text p {
+  margin: 0 0 18px;
+  color: #292524;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.72;
+  text-align: justify;
+}
+
+.article-text p:first-child::first-letter {
+  float: left;
+  font-size: 68px;
+  line-height: 0.9;
+  padding-right: 8px;
+  color: #1c1917;
+  font-weight: 900;
+}
+
+.state-box {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  background: white;
+  border-radius: 22px;
+  padding: 24px;
+  font-weight: 800;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+@media (max-width: 900px) {
+  .newspaper {
+    padding: 28px;
+  }
+
+ .newspaper-body {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+  .article-image img {
+    max-height: 360px;
+  }
+
+  .paper-meta {
+    flex-direction: column;
+  }
+}

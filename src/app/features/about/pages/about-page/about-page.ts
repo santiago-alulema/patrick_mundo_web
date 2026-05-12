@@ -18,10 +18,15 @@ export class AboutPage {
     title: 'About me',
     subtitle: 'A personal and authentic way to discover Ecuador'
   };
-  navItems: NavItem[] = [{ label: 'Home', route: '/home' }];
+  navItems: NavItem[] = [
+    { label: 'Home', route: 'home' },
+    { label: 'Gallery', route: '/gallery' },
+    { label: 'About me', route: '/about' },
+    { label: 'Blog', route: 'blogs' },
+  ];
   aboutData = {
     name: 'Patrick Mundo',
-    role: 'Private guide & travel host',
+    role: 'Travel host & local companion.',
     image: 'https://scontent.fuio5-1.fna.fbcdn.net/v/t51.82787-15/605095562_18299460847286909_9199452155195062446_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeG4fAkyJ-LhiU40JljvikUCDQ-Nrkltn20ND42uSW2fbXw10ki4DenknTAuH9ZW3EeMR4taU6NgfVlRXgPIVDpr&_nc_ohc=_ANb0HltiVEQ7kNvwEXxR5i&_nc_oc=AdoW4qsyE_Hp0KYVJlKYd0GLT2SdiUgF9XtbilnIYm69zZvDeEjP4kNimcNlsPdj7Ag&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=uPYEkAzJd0GP3VW1Y6f4yw&_nc_ss=7a3a8&oh=00_Af3xn9OnWqFSbj4bgAk_UHzkb5Ex23FZA-7Y1jiGX2gZSw&oe=69E4658C',
     description1:
       'I created this website to share some of the trips I have made in Ecuador and other beautiful places. I enjoy showing travelers the landscapes, culture and hidden gems that make each route special.',
@@ -33,18 +38,6 @@ export class AboutPage {
   };
 
   values = [
-    {
-      title: 'Local experience',
-      description: 'Real routes, authentic places and knowledge of the area.'
-    },
-    {
-      title: 'Personal attention',
-      description: 'Every trip can be adapted to your interests and pace.'
-    },
-    {
-      title: 'Comfort & trust',
-      description: 'A friendly, safe and professional travel experience.'
-    }
   ];
 
   socials: SocialLink[] = [

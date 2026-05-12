@@ -2,3 +2,25 @@
 
 @import "tailwindcss";
 
+/* Oculta el div de tu widget */
+#google_translate_element {
+  display: none !important;
+}
+
+/* Oculta la barra que Google inyecta automáticamente en el top */
+.goog-te-banner-frame,
+.skiptranslate {
+  display: none !important;
+}
+
+/* Evita que Google empuje el body hacia abajo */
+body {
+  top: 0 !important;
+  position: static !important;
+  margin-top: 0 !important;
+}
+
+/* Oculta el iframe que Google inserta */
+iframe.goog-te-menu-frame {
+  display: none !important;
+}

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavItem } from '../models/component-interface';
 
 @Component({
   selector: 'app-home-navbar',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './home-navbar.html',
   styleUrl: './home-navbar.css',
 })
@@ -12,11 +12,11 @@ export class HomeNavbar {
   @Input() items: NavItem[] = [];
   @Output() navigateTo = new EventEmitter<string>();
 
-  selectedLanguage = signal<'es' | 'en' | 'be' | 'fr'>('es');
+  selectedLanguage = signal<'es' | 'en' | 'nl' | 'fr'>('en');
   mobileMenuOpen = signal(false);
   sidebarOpen = signal(false);
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   onNavigate(item: NavItem): void {
     this.mobileMenuOpen.set(false);
@@ -32,7 +32,7 @@ export class HomeNavbar {
     }
   }
 
-  changeLanguage(lang: 'es' | 'en' | 'be' | 'fr') {
+  changeLanguage(lang: 'es' | 'en' | 'nl' | 'fr') {
     this.selectedLanguage.set(lang);
     this.mobileMenuOpen.set(false);
     this.sidebarOpen.set(false);
